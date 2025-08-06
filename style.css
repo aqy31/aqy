@@ -1,0 +1,52 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #cccccc; /* رصاصي */
+  direction: rtl;
+  color: #ffffff; /* نص أبيض */
+}
+
+header {
+  background-color: #333333; /* رصاصي غامق */
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 32px;
+  color: #ffffff;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: #eeeeee; /* أبيض مائل للرصاصي */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+.intro {
+  padding: 60px 20px;
+  text-align: center;
+  font-size: 22px;
+}
+
+footer {
+  background-color: #222222;
+  text-align: center;
+  padding: 15px;
+  font-size: 14px;
+}
