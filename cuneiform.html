@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>AQY | محول النصوص المسمارية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap');
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      direction: rtl;
+      color: #333;
+    }
+
+    .site-header {
+      background-color: #1a1a1a;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .site-header .logo {
+      height: 200px;
+      transition: height 0.3s ease;
+      cursor: pointer;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 30px 15px;
+    }
+
+    .converter {
+      background-color: white;
+      border-radius: 14px;
+      padding: 25px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      max-width: 100%;
+    }
+
+    h2 {
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .convert-container {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: nowrap;
+    }
+
+    textarea {
+      width: 45%;
+      height: 150px;
+      resize: vertical;
+      padding: 12px;
+      font-size: 18px;
+      border: 2px solid #1a1a1a;
+      border-radius: 14px;
+      font-family: 'Cairo', sans-serif;
+      box-sizing: border-box;
+      color: #333;
+    }
+
+    #output {
+      width: 45%;
+      height: 150px;
+      border: 2px solid #1a1a1a;
+      border-radius: 14px;
+      padding: 12px;
+      font-size: 28px;
+      background-color: #fff;
+      overflow-wrap: break-word;
+      direction: ltr;
+      user-select: text;
+      white-space: pre-wrap;
+      min-height: 150px;
+      box-sizing: border-box;
+      color: #333;
+    }
+
+    button {
+      width: 50px;
+      height: 50px;
+      background-color: #999999;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      color: white;
+      font-weight: 700;
+      font-size: 20px;
+      transition: background-color 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    button:hover {
+      background-color: #1a1a1a;
+    }
+
+    .instructions {
+      background-color: #fff;
+      margin-top: 30px;
+      padding: 20px 25px;
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+      font-size: 18px;
+      line-height: 1.6;
+      color: #222;
+    }
+
+    .site-footer {
+      background-color: #1a1a1a;
+      color: #ccc;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      font-weight: 700;
+      margin-top: 50px;
+    }
+
+    .social-links a {
+      color: #ffcc00;
+      text-decoration: none;
+      margin: 0 8px;
+      font-weight: 700;
+      transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <img src="logo.png" alt="شعار الموقع" class="logo" />
+  </header>
+
+  <main>
+    <div class="converter">
+      <h2>محول النصوص إلى مسماري</h2>
+      <div class="convert-container">
+        <textarea id="typingArea" placeholder="اكتب النص الإنجليزي هنا..."></textarea>
+        <button onclick="convert()" title="تحويل النص">⇄</button>
+        <div id="output" aria-label="النص المحول إلى مسماري"></div>
+      </div>
+    </div>
+
+    <div class="instructions">
+      <p><strong>أولاً: طريقة الاستعمال :</strong></p>
+      <p>تكتب المقاطع الصوتية المكونة لاسمك كالتالي (مثال): <code>ab du ul ra ah ma an</code></p>
+      <p>تضغط زر التحويل في المنتصف</p></p>
+      <p><strong>ثانياً :</strong> توجد بعض الأحرف غير المعروفة والتي تمثل أحرفًا عربية مثل:</p>
+      <p>[h=ح / خ]  [ț=ط]  [š=ش]  [ș=ص]</p>
+      <p>وإذا لم تتوفر في لوحة المفاتيح الخاصة بك قم بنسخها من هذا السطر.</p>
+     
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>تابعنا على:</p>
+    <div class="social-links">
+      <a href="https://www.instagram.com/aqy_d31?igsh=MWx1eTFod3RnazRuYw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer">Instagram</a> |
+      <a href="https://t.me/aqy_31" target="_blank" rel="noopener noreferrer">Telegram</a>
+    </div>
+  </footer>
+
+  <script>
+    const cuneiformMap = {
+      "diš": "𒁹",
+      "mí": "𒊩",
+      "ba": "𒁀",
+      "be": "𒁁",
+      "bi": "𒁉",
+      "bu": "𒁍",
+      "pu": "𒁍",
+      "ab": "𒀊",
+      "ap": "𒀊",
+      "eb": "𒅁",
+      "ib": "𒅁",
+      "ep": "𒅁",
+      "ip": "𒅁",
+      "ub": "𒌒",
+      "up": "𒌒",
+      "da": "𒁕",
+      "ța": "𒁕",
+      "de": "𒁲",
+      "di": "𒁲",
+      "țe": "𒁲",
+      "ți": "𒁲",
+      "du": "𒁺",
+      "ad": "𒀜",
+      "at": "𒀜",
+      "aț": "𒀜",
+      "ed": "𒀉",
+      "id": "𒀉",
+      "et": "𒀉",
+      "it": "𒀉",
+      "eț": "𒀉",
+      "iț": "𒀉",
+      "ud": "𒌓",
+      "ut": "𒌓",
+      "uț": "𒌓",
+      "ga": "𒂵",
+      "ge": "𒄀",
+      "gi": "𒄀",
+      "gu": "𒄖",
+      "ag": "𒀝",
+      "ak": "𒀝",
+      "aq": "𒀝",
+      "eg": "𒅅",
+      "ig": "𒅅",
+      "ek": "𒅅",
+      "ik": "𒅅",
+      "eq": "𒅅",
+      "iq": "𒅅",
+      "ug": "𒊌",
+      "uk": "𒊌",
+      "uq": "𒊌",
+      "ka": "𒅗",
+      "ke": "𒆠",
+      "ki": "𒆠",
+      "ku": "𒆪",
+      "ha": "𒄩",
+      "he": "𒄭",
+      "hi": "𒄭",
+      "hu": "𒄷",
+      "ah": "𒄴",
+      "eh": "𒄴",
+      "ih": "𒄴",
+      "uh": "𒄴",
+      "la": "𒆷",
+      "le": "𒇷",
+      "li": "𒇷",
+      "lu": "𒇻",
+      "al": "𒀠",
+      "el": "𒂖",
+      "il": "𒅋",
+      "ul": "𒌌",
+      "ma": "𒈠",
+      "me": "𒈨",
+      "mi": "𒈪",
+      "mu": "𒈬",
+      "am": "𒄠",
+      "em": "𒅎",
+      "im": "𒅎",
+      "um": "𒌝",
+      "na": "𒈾",
+      "ne": "𒉈",
+      "ni": "𒉌",
+      "nu": "𒉡",
+      "an": "𒀭",
+      "en": "𒂗",
+      "in": "𒅔",
+      "un": "𒌦",
+      "pa": "𒉺",
+      "pe": "𒉿",
+      "pi": "𒉿",
+      "wa": "𒉿",
+      "we": "𒉿",
+      "wi": "𒉿",
+      "wu": "𒉿",
+      "aw": "𒉿",
+      "ew": "𒉿",
+      "iw": "𒉿",
+      "uw": "𒉿",
+      "qa": "𒋡",
+      "qe": "𒆥",
+      "qi": "𒆥",
+      "qu": "𒄣",
+      "ra": "𒊏",
+      "re": "𒊑",
+      "ri": "𒊑",
+      "ru": "𒊒",
+      "ar": "𒅈",
+      "er": "𒅕",
+      "ir": "𒅕",
+      "ur": "𒌨",
+      "ša": "𒊭",
+      "še": "𒊺",
+      "ši": "𒅆",
+      "šu": "𒍮",
+      "aš": "𒀸",
+      "eš": "𒌍",
+      "iš": "𒅖",
+      "uš": "𒍑",
+      "sa": "𒊓",
+      "se": "𒋛",
+      "si": "𒋛",
+      "su": "𒋢",
+      "as": "𒊍",
+      "aș": "𒊍",
+      "az": "𒊍",
+      "es": "𒄑",
+      "is": "𒄑",
+      "eș": "𒄑",
+      "iș": "𒄑",
+      "ez": "𒄑",
+      "iz": "𒄑",
+      "us": "𒊻",
+      "uș": "𒊻",
+      "uz": "𒊻",
+      "șa": "𒍝",
+      "sa": "𒍝",
+      "sá": "𒍝",
+      "șe": "𒍢",
+      "și": "𒍢",
+      "șu": "𒍮",
+      "ze": "𒍣",
+      "zi": "𒍣",
+      "zu": "𒍪",
+      "ta": "𒋫",
+      "te": "𒁲",
+      "ti": "𒋾",
+      "tu": "𒌅",
+      "ya": "𒅀",
+      "ye": "𒅀",
+      "yi": "𒅀",
+      "yu": "𒅀",
+      "ay": "𒀀𒀀",
+      "ey": "𒀀𒀀",
+      "iy": "𒀀𒀀",
+      "uy": "𒀀𒀀"
+    };
+
+    function convert() {
+      let txt = document.getElementById("typingArea").value.toLowerCase();
+      const keysSorted = Object.keys(cuneiformMap).sort((a, b) => b.length - a.length);
+      const pattern = keysSorted.join("|");
+      txt = txt.replace(new RegExp(pattern, "g"), match => cuneiformMap[match]);
+      document.getElementById("output").innerText = txt;
+    }
+
+    // التحويل تلقائي عند الضغط على Enter
+    document.getElementById('typingArea').addEventListener('keyup', function(event) {
+      if (event.key === "Enter") {
+        convert();
+      }
+    });
+  </script>
+
+</body>
+</html>
