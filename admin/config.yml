@@ -1,0 +1,54 @@
+backend:
+  name: github
+  repo: aqy31/aqy  # اسم المستودع عندك
+media_folder: "assets/images"
+public_folder: "/assets/images"
+
+collections:
+  - name: "al3nqaa"
+    label: "Al3nqaa"
+    folder: "_al3nqaa"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Icon", name: "icon", widget: "image" }
+      - { label: "Content", name: "body", widget: "markdown" }
+
+  - name: "cuneiform"
+    label: "Cuneiform"
+    folder: "_cuneiform"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Icon", name: "icon", widget: "image" }
+      - { label: "Content", name: "body", widget: "markdown" }
+
+  - name: "lubshu"
+    label: "Lubshu"
+    folder: "_lubshu"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Icon", name: "icon", widget: "image" }
+      - { label: "Content", name: "body", widget: "markdown" }
+
+  - name: "designs"
+    label: "Designs"
+    folder: "_designs"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Icon", name: "icon", widget: "image" }
+      - { label: "Content", name: "body", widget: "markdown" }
